@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>WUHANG</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="https://en.sjtu.edu.cn/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://en.sjtu.edu.cn/layui/css/layui.css">
+    <link rel="stylesheet" href="https://en.sjtu.edu.cn/css/video-js.min.css">
+    <link rel="stylesheet" href="https://en.sjtu.edu.cn/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_2441361_x8gjxthrrzb.css">
+    <link rel="stylesheet" href="https://en.sjtu.edu.cn/css/animate.min.css">
+    <link rel="stylesheet" href="a.css">
+    <link rel="stylesheet" href="https://en.sjtu.edu.cn/css/style.css?v=20220110">
+    <style>
+        header {
+            background-color: #9b7b40d0;
+        }
+
+        .ERGOU {
+            width: 3%;
+            height: auto;
+        }
+
+        .WGZ {
+            width: 3.2%;
+            height: auto;
+
+        }
+
+        body {
+            background: #c0a880 !important;
+
+        }
+
+        .content-wrapper {
+            background-color: #9b7b40d0
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+
+
+        header {
+            background-color: transparent;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+        }
+
+
+
+        img:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            background-color: #9b7b40d0;
+            text-align: center;
+        }
+
+        footer img {
+            display: block;
+            margin: 0 auto;
+            width: 30%;
+            height: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Open Sans', 'Arial', sans-serif;
+        }
+
+        .listing {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            /*just for pen positioning*/
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1350px;
+        }
+
+        .product {
+            width: 360px;
+            position: relative;
+        }
+
+        .product a {
+            text-decoration: none;
+        }
+
+        .img-wrapper {
+            display: block;
+            width: 100%;
+            height: 360px;
+            border: 1px solid #FFFFFF;
+            border-bottom: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+
+
+
+        .info {
+            width: 100%;
+            background: #000;
+            color: #fff;
+            position: relative;
+            padding: 40px 10px 20px 10px;
+            text-align: center;
+
+            vertical-align: middle;
+            transform: translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+            backface-visibility: hidden;
+            transition-property: color, height;
+            transition-duration: 0.3s, 0.4s;
+            transition-timing-function: ease-out;
+            height: 83px;
+        }
+
+        .info:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            transform: scaleY(0);
+            transform-origin: 50%;
+            transition: transform 0.3s ease-out;
+        }
+
+        .info:after {
+            visibility: hidden;
+            pointer-events: none;
+            position: absolute;
+            z-index: -1;
+            content: '';
+            border-style: solid;
+            transition-duration: 0.3s;
+            transition-property: transform;
+            left: calc(50% - 11px);
+            bottom: 0;
+            border-width: 10px 10px 0 10px;
+            border-color: black transparent transparent transparent;
+        }
+
+        .product:hover .info {
+            height: 40px;
+        }
+
+        .product:hover .info:before {
+            transform: scaleY(0.7);
+        }
+
+        .product:hover .info:after {
+            visibility: visible;
+            transform: translateY(10px);
+        }
+
+        .title {
+            transition: transform 0.3s ease-out;
+            margin-bottom: 50px;
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .title a {
+            color: inherit;
+        }
+
+        .product:hover .title {
+            transform: translateY(-18px);
+            font-weight: bold;
+            color: #000;
+        }
+
+        .price {
+            background: #e32d2c;
+            position: absolute;
+            font-size: 1.3em;
+            padding: 4px 13px;
+            top: -15px;
+            right: 10px;
+        }
+
+        .price.sale {
+            background: #00ba2f;
+        }
+
+        .price.old {
+            font-size: 0.95em;
+            padding: 4px 6px;
+            text-decoration: line-through;
+            top: -43px;
+        }
+
+        .actions-wrapper {
+            margin-top: 14px;
+            display: flex;
+            justify-content: space-around;
+            visibility: hidden;
+        }
+
+        .actions-wrapper * {
+            width: 50%;
+            padding: 2px 0;
+            text-align: center;
+            color: #191919;
+            font-size: 0.95em;
+            font-weight: bold;
+        }
+
+        .actions-wrapper *:before {
+            font-family: "FontAwesome";
+            margin-right: 8px;
+        }
+
+        .wishlist {
+            border-right: 1px solid #afafaf;
+        }
+
+        .wishlist:hover {
+            color: #e32d2c;
+        }
+
+        .wishlist:before {
+            content: "\f08a";
+        }
+
+        .cart:hover {
+            color: #0a75b9;
+        }
+
+        .cart:before {
+            content: "\f07a";
+        }
+
+        .product:hover .actions-wrapper * {
+            visibility: visible;
+        }
+
+        .note {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 4px 8px;
+            font-size: 0.9em;
+        }
+
+        .note.on-sale {
+            background: #00ba2f;
+            color: #fff;
+        }
+
+        .note.no-stock {
+            background: #191919;
+            color: #fff;
+        }
+        #Back {
+            position: absolute;
+            top: 30px;
+            right: 0;
+            font-size: 30px;
+            color: white;
+            font-family: Georgia;
+            margin-top: 80px;
+        }
+        .centered-text6 {
+            position: absolute;
+            top: 5400px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?294bf634eac03fa80fd410b49422ded8";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+
+
+
+<body style="background-color: #9b7b40d0;">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <div class="content-wrapper">
+        <a href="javascript:history.go(-1);">
+            <div id="Back">BACK</div>
+        </a>
+
+    
+    <div class="headerTemp"></div>
+    <header>
+        <div class="header">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="WUHANG.html" class="logo-black"><img src="ICON2.png" alt=""></a>
+                    <a href="WUHANG.html" class="logo-white"><img src="ICON2.png" alt=""></a>
+                </div>
+                <div class="header-main">
+                    <div class="secondary-nav">
+                        <div class="secondary-bg"></div>
+                        <div class="flex">
+                            <ul class="layui-nav nav-horizon" lay-filter="">
+                                <li class="layui-nav-item">
+                                    <a href="javascript:;">Sign in</a>
+                                    <dl class="layui-nav-child">
+
+                                    </dl>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li><a href="About us.html" target="_blank">About us</a></li>
+                                <li><a href="About us.html" target="_blank">Bag
+                                    </a></li>
+                                <li>
+                                    <a href="https://www.sjtu.edu.cn/" target="_blank" class="language-btn">
+                                        <i class="iconfont icon-language"></i> Language
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="header-nav">
+                        <ul class="layui-nav nav-horizon" lay-filter="" id="resText">
+                            <li class="layui-nav-item">
+                                <a href="/about">What's New</a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="/news">Jewelry &amp;Watches</a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="/admission"> Handbags</a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="/schools">Woman</a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="/research">Man</a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="/faculty/academicians/casmembers/1/all">Children</a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="/campus">Vault</a>
+                            </li>
+                        </ul>
+                        <div class="ERGOU">
+                            <img src="SHOPPINGCART.png" alt="hahaha
+                            "></i>
+                        </div>
+                        <div class="WGZ">
+                            <a href="Search.html"><img src="search.png" alt=""></a>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <ul class="listing">
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p1.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">CarryALL MM</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p2.avif" alt="Green running shoe" />
+            </a>
+            <div class="note no-stock">Out of stock</div>
+
+            <div class="info">
+                <div class="title">Graceful PM</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p3.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">GRACEFUL lover</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p4.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Loop</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p5.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">BOLOGNE</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p6.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">PASSY</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p7.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">NéoNoé MM</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p8.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">OnTheGo GM</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p9.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Pochette Métis East West</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <a href="product.html"><img src="AD7.webp" alt="SAFAS"></a>
+        
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p10.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Pochette Métis South West</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p11.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Dauphine MM</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p12.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Ellipse PM</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p13.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Petite Malle Souple</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p14.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Noé</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p15.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Padlock On Strap</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p16.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Petite Malle V</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p17.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">ZELDA</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p18.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Pochette Accessoires</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p19.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Boite Chapeau Souple MM</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p20.webp" alt="Blue running shoe" />
+            </a>
+
+            <div class="info">
+                <div class="title">Mini Boite Chapeau</div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+        <li class="product">
+            <a class="img-wrapper" href="productcard.html">
+                <img src="p21.webp" alt="Pink running shoe" />
+            </a>
+            <div class="note on-sale">On sale</div>
+
+            <div class="info">
+                <div class="title"><a href="#">LIZHUOWEN</a></div>
+
+            </div>
+
+            <div class="actions-wrapper">
+                <a href="#" class="add-btn wishlist">Wishlist</a>
+                <a href="#" class="add-btn cart">Cart</a>
+            </div>
+        </li>
+
+    </ul>
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
